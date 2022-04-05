@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControlMaterial">
+   <top>
+      <HBox prefHeight="163.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="164.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icons/jt.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox prefHeight="74.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane alignment="CENTER" maxHeight="500.0" maxWidth="1280.0" minHeight="300.0" prefHeight="482.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="427.0" minWidth="0.0" prefWidth="427.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="499.0" minWidth="5.0" prefWidth="258.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="426.0" minWidth="86.0" prefWidth="260.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="452.0" minHeight="0.0" prefHeight="428.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="toMaterial" contentDisplay="TOP" mnemonicParsing="false" onAction="#ClickMaterial" prefHeight="297.0" prefWidth="306.0" stylesheets="@../css/styling.css" text="Materiales" textAlignment="JUSTIFY">
+                     <graphic>
+                        <ImageView fitHeight="107.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icons/wood.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Roboto" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="toArticle" contentDisplay="TOP" mnemonicParsing="false" onAction="#ClickArticle" prefHeight="297.0" prefWidth="306.0" stylesheets="@../css/styling.css" text="Articulos" GridPane.columnIndex="1">
+                     <graphic>
+                        <ImageView fitHeight="107.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icons/bed.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Roboto" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="toBudget" contentDisplay="TOP" mnemonicParsing="false" onAction="#ClickBudget" prefHeight="297.0" prefWidth="306.0" stylesheets="@../css/styling.css" text="Presupuestos" GridPane.columnIndex="2">
+                     <graphic>
+                        <ImageView fitHeight="107.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icons/ruler_50px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Roboto" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="40.0" right="40.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
