@@ -27,7 +27,10 @@ public class Article {
         this.finalPrice = finalPrice;
     }
 
+    public Article editArticle(Article article){
 
+        return article;
+    }
 
     @Override
     public String toString() {

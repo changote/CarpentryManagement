@@ -89,10 +89,10 @@
             </Button>
          </children>
       </VBox>
-      <TableView layoutX="247.0" layoutY="206.0" prefHeight="440.0" prefWidth="1033.0">
+      <TableView fx:id="tableMaterialView" layoutX="247.0" layoutY="206.0" prefHeight="440.0" prefWidth="1033.0">
          <columns>
-            <TableColumn prefWidth="648.0" text="Nombre" />
-            <TableColumn minWidth="0.0" prefWidth="186.0" text="Precio Costo" />
+            <TableColumn fx:id="tableMaterialName" prefWidth="648.0" text="Nombre" />
+            <TableColumn fx:id="tableMaterialCost" minWidth="0.0" prefWidth="186.0" text="Precio Costo" />
          </columns>
       </TableView>
       <HBox layoutX="247.0" layoutY="163.0" prefHeight="44.0" prefWidth="1033.0">

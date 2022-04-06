@@ -2,9 +2,9 @@ package Carpentry.Materials;
 
 public class Material {
     private String name;
-    private String costPrice;
+    private int costPrice;
 
-    public Material(String name, String costPrice) {
+    public Material(String name, int costPrice) {
         this.name = name;
         this.costPrice = costPrice;
     }
@@ -13,7 +13,12 @@ public class Material {
         this.name = name;
     }
 
-    public void setCostPrice(String costPrice) {
+    public void setCostPrice(int costPrice) {
         this.costPrice = costPrice;
+    }
+
+    public Material editMaterial(Material material){
+
+        return material;
     }
 }

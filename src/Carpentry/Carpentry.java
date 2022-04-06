@@ -18,4 +18,15 @@ public class Carpentry {
         this.listArticle = new ArrayList<Article>();
     }
 
+    public void addMaterial(Material mat){
+        listMaterial.add(mat);
+    }
+
+    public void addArticle(Article art){
+        listArticle.add(art);
+    }
+
+
+
+
 }
