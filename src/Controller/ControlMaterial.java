@@ -1,8 +1,10 @@
 package Controller;
 
+import Carpentry.Carpentry;
 import Carpentry.Materials.Article;
 import Carpentry.Materials.Material;
 import Main.Main;
+import json.CarpentryJson;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import Carpentry.Carpentry;
 
 
 import javafx.scene.control.TableColumn;
@@ -19,11 +20,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class ControlMaterial implements Initializable {
-    Carpentry carp = Main.Harcodeo();
     @FXML
     private Button toMaterial;
     @FXML
@@ -54,16 +53,15 @@ public class ControlMaterial implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-        loadTable();
-
-
+        CarpentryJson json = new CarpentryJson();
+        //Leo el archivo json
+        Carpentry carp = json.readCarpentryJson();
+        loadTable(carp);
+        json.saveCarpentryJson(carp);
     }
 
-    public void loadTable(){
-        //Harcodeo
-        Carpentry carp = Main.Harcodeo();
+    public void loadTable(Carpentry carp){
+
         //Inserto los datos de mi ArrayList en una ObservableList de la columna
         ObservableList<Material> dataMaterial = FXCollections.observableArrayList(carp.getListMaterial());
         tableMaterialName.setCellValueFactory(new PropertyValueFactory<Material,String>("name"));

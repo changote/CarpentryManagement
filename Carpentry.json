@@ -1,0 +1,23 @@
+{
+  "name": "Pitu Tejeria",
+  "address": "sadasd",
+  "listMaterial": [
+    {
+      "name": "pepe",
+      "costPrice": 123
+    },
+    {
+      "name": "pepe",
+      "costPrice": 123
+    },
+    {
+      "name": "pepe",
+      "costPrice": 123
+    },
+    {
+      "name": "pepe",
+      "costPrice": 123
+    }
+  ],
+  "listArticle": []
+}
