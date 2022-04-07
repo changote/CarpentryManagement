@@ -17,6 +17,14 @@ public class Material {
         this.costPrice = costPrice;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getCostPrice() {
+        return costPrice;
+    }
+
     public Material editMaterial(Material material){
 
         return material;

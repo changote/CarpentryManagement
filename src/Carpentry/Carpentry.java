@@ -14,8 +14,24 @@ public class Carpentry {
     public Carpentry(String name,String address){
         this.name = name;
         this.address = address;
-        this.listMaterial = new ArrayList<Material>();
-        this.listArticle = new ArrayList<Article>();
+        this.listMaterial = new ArrayList<>();
+        this.listArticle = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public ArrayList<Material> getListMaterial() {
+        return listMaterial;
+    }
+
+    public ArrayList<Article> getListArticle() {
+        return listArticle;
     }
 
     public void addMaterial(Material mat){

@@ -3,23 +3,27 @@ package Controller;
 import Carpentry.Materials.Article;
 import Carpentry.Materials.Material;
 import Main.Main;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import Carpentry.Carpentry;
 
-import java.net.URL;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class ControlMaterial implements Initializable {
+    Carpentry carp = Main.Harcodeo();
     @FXML
     private Button toMaterial;
     @FXML
@@ -29,31 +33,50 @@ public class ControlMaterial implements Initializable {
     @FXML
     private Button goBack;
     @FXML
-    private TableView<Material> tableMaterialView;
+    private TableView<Material> tableMaterialView = new TableView<Material>();
     @FXML
-    private TableView<Article> tableArticleView;
+    private TableView<Article> tableArticleView = new TableView<Article>();
     @FXML
-    private TableColumn<Material,String> tableMaterialName;
+    private TableColumn<Material,String> tableMaterialName = new TableColumn<>("name");
     @FXML
-    private TableColumn<Article,String> tableArticleName;
+    private TableColumn<Article,String> tableArticleName = new TableColumn<>("name");
     @FXML
-    private TableColumn<Material, Integer> tableMaterialCost;
+    private TableColumn<Material, Integer> tableMaterialCost = new TableColumn<>("cost");
     @FXML
-    private TableColumn<Article, Integer> tableArticleCost;
+    private TableColumn<Article, Integer> tableArticleCost = new TableColumn<>("cost");
     @FXML
-    private TableColumn<Article, Integer> tableArticleFinalPrice;
+    private TableColumn<Article, Integer> tableArticleFinalPrice = new TableColumn<>("finalCost");
 
-    ObservableList<Material> list = FXCollections.observableArrayList
-            (new Material("Clavo",30));
+
+
+
+
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        tableMaterialName.setCellValueFactory(new PropertyValueFactory<Material,String>("tableMaterialName"));
-        tableMaterialCost.setCellValueFactory(new PropertyValueFactory<Material,Integer>("tableMaterialCost"));
-        tableArticleName.setCellValueFactory(new PropertyValueFactory<Article,String>("tableArticleName"));
-        tableArticleCost.setCellValueFactory(new PropertyValueFactory<Article,Integer>("tableArticleCost"));
-        tableArticleCost.setCellValueFactory(new PropertyValueFactory<Article,Integer>("tableArticleFinalPrice"));
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        tableMaterialView.setItems(list);
+
+        loadTable();
+
+
+    }
+
+    public void loadTable(){
+        //Harcodeo
+        Carpentry carp = Main.Harcodeo();
+        //Inserto los datos de mi ArrayList en una ObservableList de la columna
+        ObservableList<Material> dataMaterial = FXCollections.observableArrayList(carp.getListMaterial());
+        tableMaterialName.setCellValueFactory(new PropertyValueFactory<Material,String>("name"));
+        tableMaterialCost.setCellValueFactory(new PropertyValueFactory<Material,Integer>("costPrice"));
+        tableArticleName.setCellValueFactory(new PropertyValueFactory<Article,String>("name"));
+        tableArticleCost.setCellValueFactory(new PropertyValueFactory<Article,Integer>("costPrice"));
+        tableArticleFinalPrice.setCellValueFactory(new PropertyValueFactory<Article,Integer>("finalPrice"));
+
+
+
+        tableMaterialView.getColumns().clear();
+        tableMaterialView.getColumns().addAll(tableMaterialName,tableMaterialCost);
+        tableMaterialView.setItems(dataMaterial);
     }
 
 

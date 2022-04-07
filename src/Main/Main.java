@@ -31,6 +31,7 @@ public class Main extends Application {
 
 
 
+
     }
 
     public void changeScene(String fxml) throws IOException{
@@ -40,8 +41,9 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        Carpentry carp = Harcodeo();
+
         launch(args);
+
 
 
     }
