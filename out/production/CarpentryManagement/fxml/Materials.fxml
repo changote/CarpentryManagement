@@ -33,7 +33,7 @@
                   <Insets left="10.0" top="125.0" />
                </HBox.margin>
             </ImageView>
-            <TextField alignment="TOP_LEFT" prefHeight="0.0" prefWidth="220.0" promptText="Busqueda">
+            <TextField fx:id="keywordTextField" alignment="TOP_LEFT" prefHeight="0.0" prefWidth="220.0" promptText="Busqueda">
                <opaqueInsets>
                   <Insets top="500.0" />
                </opaqueInsets>
@@ -109,7 +109,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" text="Nuevo material">
+            <Button mnemonicParsing="false" onAction="#ClickNewMaterial" prefHeight="30.0" prefWidth="128.0" text="Nuevo material">
                <HBox.margin>
                   <Insets left="470.0" top="7.0" />
                </HBox.margin>

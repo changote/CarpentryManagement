@@ -6,13 +6,13 @@ public class Article {
     private String name;
     private float costPrice;
     private float finalPrice;
-    private ArrayList<Material> materialslist;
+    private ArrayList<Material> materialList;
 
     public Article(String name, float costprice, float finalprice, ArrayList<Material> materialslist) {
         this.name = name;
         this.costPrice = costprice;
         this.finalPrice = finalprice;
-        this.materialslist = new ArrayList<>(materialslist);
+        this.materialList = new ArrayList<>(materialslist);
     }
 
     public void setName(String name) {
@@ -38,7 +38,7 @@ public class Article {
                 "/nname='" + name + '\'' +
                 ", /ncostprice=" + costPrice +
                 ", /nfinalprice=" + finalPrice +
-                ", /nmaterialslist=" + materialslist +
+                ", /nmaterialslist=" + materialList +
                 '}';
     }
 }

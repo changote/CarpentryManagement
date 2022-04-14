@@ -4,6 +4,9 @@ import Carpentry.Carpentry;
 import Carpentry.Materials.Article;
 import Carpentry.Materials.Material;
 import Main.Main;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.control.*;
 import json.CarpentryJson;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,15 +14,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
 
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ControlMaterial implements Initializable {
@@ -31,6 +32,14 @@ public class ControlMaterial implements Initializable {
     private Button toBudget;
     @FXML
     private Button goBack;
+    @FXML
+    private Label myLabel = new Label();
+    @FXML
+    private TextField keywordTextField = new TextField();
+    @FXML
+    private TextField materialNameTextField = null;
+    @FXML
+    private TextField materialCostTextField = new TextField();
     @FXML
     private TableView<Material> tableMaterialView = new TableView<Material>();
     @FXML
@@ -46,21 +55,23 @@ public class ControlMaterial implements Initializable {
     @FXML
     private TableColumn<Article, Integer> tableArticleFinalPrice = new TableColumn<>("finalCost");
 
-
+    Carpentry carp = Main.Harcodeo();
 
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        CarpentryJson json = new CarpentryJson();
+        //CarpentryJson json = new CarpentryJson();
         //Leo el archivo json
-        Carpentry carp = json.readCarpentryJson();
-        loadTable(carp);
-        json.saveCarpentryJson(carp);
+        //Carpentry carp = json.readCarpentryJson();
+
+        ObservableList<Material> dataMaterial = loadTable(carp);
+        searchBarProduct(dataMaterial);
+        //json.saveCarpentryJson(carp);
     }
 
-    public void loadTable(Carpentry carp){
+    public ObservableList<Material> loadTable(Carpentry carp){
 
         //Inserto los datos de mi ArrayList en una ObservableList de la columna
         ObservableList<Material> dataMaterial = FXCollections.observableArrayList(carp.getListMaterial());
@@ -75,9 +86,53 @@ public class ControlMaterial implements Initializable {
         tableMaterialView.getColumns().clear();
         tableMaterialView.getColumns().addAll(tableMaterialName,tableMaterialCost);
         tableMaterialView.setItems(dataMaterial);
+
+        return dataMaterial;
+
+    }
+    public void searchBarProduct(ObservableList<Material> dataMaterial ){
+        FilteredList<Material> filteredData = new FilteredList<>(dataMaterial, b -> true);
+        keywordTextField.textProperty().addListener((observable,oldValue,newValue) -> {
+            filteredData.setPredicate(tableMaterialName -> {
+
+                if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
+                    return true;
+                }
+                String searchKeyword = newValue.toLowerCase();
+
+                if(tableMaterialName.getName().toLowerCase().indexOf(searchKeyword) > -1){
+                    return true;
+                }
+                else
+                    return false;
+            });
+        });
+
+        SortedList<Material>sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableMaterialView.comparatorProperty());
+
+        tableMaterialView.setItems(sortedData);
+
     }
 
 
+    public void ClickNewMaterial(ActionEvent actionEvent) throws IOException {
+        Main m = new Main();
+        m.changeScene("/fxml/AddMaterial.fxml");
+
+    }
+
+    public void ClickAddMaterial(ActionEvent actionEvent) throws IOException{
+
+        Material newMat = new Material(materialNameTextField.getText(),Integer.parseInt(materialCostTextField.getText()));
+        carp.addMaterial(newMat);
+        if ((materialNameTextField.getText().isBlank()) || (materialNameTextField.getText().length() < 3)) {
+            myLabel.setText("Ingrese al menos tres caracteres.");
+        }
+
+        myLabel.setText("Solo se admiten numeros.");
+
+    }
     public void ClickMaterial(ActionEvent actionEvent) throws IOException {
         Main m = new Main();
         m.changeScene("/fxml/Materials.fxml");

@@ -13,9 +13,6 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-
-    double y=0;
-    double x=0;
     private static Stage stg;
 
 
@@ -52,9 +49,9 @@ public class Main extends Application {
 
     public static Carpentry Harcodeo(){
         Carpentry carp = new Carpentry("Pitu Tejeria","sadasd");
-        Material mat = new Material("pepe",123);
+        Material mat = new Material("auto",123);
         carp.addMaterial(mat);
-        Material mat1 = new Material("pepe",123);
+        Material mat1 = new Material("casa",123);
         carp.addMaterial(mat1);
         Material mat2 = new Material("pepe",123);
         carp.addMaterial(mat2);
