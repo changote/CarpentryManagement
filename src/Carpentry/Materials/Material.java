@@ -29,4 +29,14 @@ public class Material {
 
         return material;
     }
+
+
+
+    @Override
+    public String toString() {
+        return "Material{" +
+                "name='" + name + '\'' +
+                ", costPrice=" + costPrice +
+                '}';
+    }
 }

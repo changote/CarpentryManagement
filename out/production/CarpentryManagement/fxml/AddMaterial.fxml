@@ -27,19 +27,24 @@
       <HBox layoutY="620.0" prefHeight="100.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" />
       <VBox layoutX="494.0" layoutY="131.0" prefHeight="489.0" prefWidth="293.0" AnchorPane.leftAnchor="510.0" AnchorPane.rightAnchor="400.0">
          <children>
-            <TextField fx:id="materialNameTextField" prefHeight="44.0" prefWidth="348.0" promptText="Ingrese el nombre">
+            <TextField fx:id="materialNameTextField" prefHeight="44.0" prefWidth="348.0" promptText="Ej: Melamina 18mm">
                <VBox.margin>
                   <Insets top="100.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="materialCostTextField" prefHeight="44.0" prefWidth="348.0" promptText="Ingrese el coste">
+            <Label fx:id="nameErrorLabel" prefHeight="17.0" prefWidth="180.0" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets top="100.0" />
+                  <Insets left="100.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="materialCostTextField" prefHeight="44.0" prefWidth="348.0" promptText="Ej: 3000">
+               <VBox.margin>
+                  <Insets top="70.0" />
                </VBox.margin>
             </TextField>
-            <Label fx:id="errorLabel" textAlignment="CENTER">
+            <Label fx:id="costErrorLabel" prefHeight="17.0" prefWidth="180.0" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets left="120.0" top="30.0" />
+                  <Insets left="100.0" top="10.0" />
                </VBox.margin>
             </Label>
          </children>
@@ -54,7 +59,7 @@
             <Font name="Roboto Light" size="21.0" />
          </font>
       </Text>
-      <Button fx:id="addNewMaterial" layoutX="751.0" layoutY="524.0" mnemonicParsing="false" onAction="#ClickAddMaterial" prefHeight="44.0" prefWidth="200.0" text="Añadir" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="401.0" AnchorPane.rightAnchor="679.0" AnchorPane.topAnchor="524.0">
+      <Button fx:id="addNewMaterial" layoutX="751.0" layoutY="524.0" mnemonicParsing="false" onAction="#newMaterialButtonPushed" prefHeight="44.0" prefWidth="200.0" text="Añadir" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="401.0" AnchorPane.rightAnchor="679.0" AnchorPane.topAnchor="524.0">
          <font>
             <Font name="Roboto Light" size="22.0" />
          </font>

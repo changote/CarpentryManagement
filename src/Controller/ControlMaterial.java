@@ -33,13 +33,17 @@ public class ControlMaterial implements Initializable {
     @FXML
     private Button goBack;
     @FXML
-    private Label myLabel = new Label();
+    private Button addNewMaterial;
+    @FXML
+    private Label nameErrorLabel = new Label();
+    @FXML
+    private Label costErrorLabel = new Label();
     @FXML
     private TextField keywordTextField = new TextField();
     @FXML
     private TextField materialNameTextField = null;
     @FXML
-    private TextField materialCostTextField = new TextField();
+    private TextField materialCostTextField = null;
     @FXML
     private TableView<Material> tableMaterialView = new TableView<Material>();
     @FXML
@@ -66,12 +70,12 @@ public class ControlMaterial implements Initializable {
         //Leo el archivo json
         //Carpentry carp = json.readCarpentryJson();
 
-        ObservableList<Material> dataMaterial = loadTable(carp);
+        ObservableList<Material> dataMaterial = loadTable();
         searchBarProduct(dataMaterial);
         //json.saveCarpentryJson(carp);
     }
 
-    public ObservableList<Material> loadTable(Carpentry carp){
+    public ObservableList<Material> loadTable(){
 
         //Inserto los datos de mi ArrayList en una ObservableList de la columna
         ObservableList<Material> dataMaterial = FXCollections.observableArrayList(carp.getListMaterial());
@@ -86,6 +90,7 @@ public class ControlMaterial implements Initializable {
         tableMaterialView.getColumns().clear();
         tableMaterialView.getColumns().addAll(tableMaterialName,tableMaterialCost);
         tableMaterialView.setItems(dataMaterial);
+
 
         return dataMaterial;
 
@@ -119,20 +124,67 @@ public class ControlMaterial implements Initializable {
     public void ClickNewMaterial(ActionEvent actionEvent) throws IOException {
         Main m = new Main();
         m.changeScene("/fxml/AddMaterial.fxml");
-
     }
 
     public void ClickAddMaterial(ActionEvent actionEvent) throws IOException{
 
-        Material newMat = new Material(materialNameTextField.getText(),Integer.parseInt(materialCostTextField.getText()));
-        carp.addMaterial(newMat);
-        if ((materialNameTextField.getText().isBlank()) || (materialNameTextField.getText().length() < 3)) {
-            myLabel.setText("Ingrese al menos tres caracteres.");
+        boolean flagName = false;
+        boolean flagCost = false;
+        Material newMat = null;
+        try {
+            newMat = new Material(materialNameTextField.getText(),Integer.parseInt(materialCostTextField.getText()));
+            if(isInt(materialCostTextField) && (materialNameTextField.getText().length() < 3)){
+                carp.addMaterial(newMat);
+                Main m = new Main();
+                m.changeScene("/fxml/Materials.fxml");
+            }
+        }
+        catch (Exception e){
+            if (materialNameTextField.getText().length() < 3) {
+                nameErrorLabel.setText("Ingrese al menos tres caracteres.");
+            }
+            else{
+                flagName = true;
+            }
+            if (!isInt(materialCostTextField)) {
+                costErrorLabel.setText("Ingrese solo numeros.");
+            }
+            else{
+                flagCost = true;
+            }
+
+        }
+        if(flagCost && flagName)
+        {
+            carp.addMaterial(newMat);
+            loadTable();
+            Main m = new Main();
+            m.changeScene("/fxml/Materials.fxml");
         }
 
-        myLabel.setText("Solo se admiten numeros.");
 
     }
+
+    public void newMaterialButtonPushed() throws IOException {
+        Material newMat = new Material(materialNameTextField.getText(),Integer.parseInt(materialCostTextField.getText()));
+        carp.addMat(newMat);
+        carp.mostrarMaterial();
+        tableMaterialView.getColumns().addAll(tableMaterialName,tableMaterialCost);
+        tableMaterialView.getItems();
+        Main m = new Main();
+        m.changeScene("/fxml/Materials.fxml");
+    }
+
+    private boolean isInt(TextField input){
+        try{
+            int cost = Integer.parseInt(input.getText());
+            return true;
+        }
+        catch(NumberFormatException e){
+            return false;
+        }
+    }
+
     public void ClickMaterial(ActionEvent actionEvent) throws IOException {
         Main m = new Main();
         m.changeScene("/fxml/Materials.fxml");
