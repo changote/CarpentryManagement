@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Material {
-    private StringProperty name =  new SimpleStringProperty();
+    private StringProperty name;
     private IntegerProperty costPrice;
     private MaterialClass materialClass;
 
