@@ -36,11 +36,6 @@ public class MaterialController implements Initializable {
     @FXML private TextField materialCostTextField;
 
     @FXML private TextField keywordTextField;
-    @FXML private Button maderasButton;
-    @FXML private Button herrajesButton;
-    @FXML private Button tornillosButton;
-    @FXML private Button tapacantosButton;
-    @FXML private Button otrosButton;
 
     CarpentryJson json = new CarpentryJson();
     /**
