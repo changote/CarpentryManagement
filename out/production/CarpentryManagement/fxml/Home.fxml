@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControlMaterial">
+<BorderPane minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SceneController">
    <top>
       <HBox prefHeight="163.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" BorderPane.alignment="CENTER">
          <children>
@@ -68,7 +68,7 @@
                         <Font name="Roboto" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="toBudget" contentDisplay="TOP" mnemonicParsing="false" onAction="#ClickBudget" prefHeight="297.0" prefWidth="306.0" stylesheets="@../css/styling.css" text="Presupuestos" GridPane.columnIndex="2">
+                  <Button fx:id="toBudget" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="297.0" prefWidth="306.0" stylesheets="@../css/styling.css" text="Presupuestos" GridPane.columnIndex="2">
                      <graphic>
                         <ImageView fitHeight="107.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
                            <image>

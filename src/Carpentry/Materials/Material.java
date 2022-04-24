@@ -1,28 +1,45 @@
 package Carpentry.Materials;
 
-public class Material {
-    private String name;
-    private int costPrice;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-    public Material(String name, int costPrice) {
-        this.name = name;
-        this.costPrice = costPrice;
+public class Material {
+    private StringProperty name =  new SimpleStringProperty();
+    private IntegerProperty costPrice;
+    private MaterialClass materialClass;
+
+    public Material(String name, Integer costPrice, MaterialClass materialClass) {
+        this.name =  new SimpleStringProperty(name);
+        this.costPrice = new SimpleIntegerProperty(costPrice);
+        this.materialClass = materialClass;
     }
+
+
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
-    public void setCostPrice(int costPrice) {
-        this.costPrice = costPrice;
+    public MaterialClass getMaterialClass() {
+        return materialClass;
+    }
+
+    public void setMaterialClass(MaterialClass materialClass) {
+        this.materialClass = materialClass;
+    }
+
+    public void setCostPrice(Integer costPrice) {
+        this.costPrice.set(costPrice);
     }
 
     public String getName() {
-        return name;
+        return this.name.get();
     }
 
     public int getCostPrice() {
-        return costPrice;
+        return this.costPrice.get();
     }
 
     public Material editMaterial(Material material){

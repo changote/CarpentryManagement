@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #DBDBDB;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControlMaterial">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #DBDBDB;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MaterialController">
    <children>
       <HBox prefHeight="163.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;">
          <children>
@@ -46,7 +48,7 @@
       <HBox layoutY="646.0" prefHeight="74.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" />
       <VBox layoutY="163.0" prefHeight="483.0" prefWidth="247.0" style="-fx-background-color: #6396E7;">
          <children>
-            <Button id="button2" mnemonicParsing="false" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Maderas">
+            <Button id="button2" fx:id="maderasButton" mnemonicParsing="false" onAction="#maderaList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Maderas">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -54,7 +56,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Herrajes">
+            <Button id="button2" mnemonicParsing="false" onAction="#herrajelist" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Herrajes">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -62,7 +64,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Tornillos/Clavos">
+            <Button id="button2" mnemonicParsing="false" onAction="#tornilloList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Tornillos/Clavos">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -70,7 +72,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Tapacantos">
+            <Button id="button2" mnemonicParsing="false" onAction="#tapacantoList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Tapacantos">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,7 +80,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Varios">
+            <Button id="button2" mnemonicParsing="false" onAction="#otrosList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Varios">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -89,10 +91,10 @@
             </Button>
          </children>
       </VBox>
-      <TableView fx:id="tableMaterialView" layoutX="247.0" layoutY="206.0" prefHeight="440.0" prefWidth="1033.0">
+      <TableView fx:id="tableMaterialView" layoutX="247.0" layoutY="206.0" prefHeight="440.0" prefWidth="769.0">
          <columns>
-            <TableColumn fx:id="tableMaterialName" prefWidth="648.0" text="Nombre" />
-            <TableColumn fx:id="tableMaterialCost" minWidth="0.0" prefWidth="186.0" text="Precio Costo" />
+            <TableColumn fx:id="materialNameColumn" prefWidth="587.0" text="Nombre" />
+            <TableColumn fx:id="materialCostColumn" minWidth="0.0" prefWidth="181.0" text="Precio Costo" />
          </columns>
       </TableView>
       <HBox layoutX="247.0" layoutY="163.0" prefHeight="44.0" prefWidth="1033.0">
@@ -109,21 +111,9 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#ClickNewMaterial" prefHeight="30.0" prefWidth="128.0" text="Nuevo material">
-               <HBox.margin>
-                  <Insets left="470.0" top="7.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Icons/plus_math_120px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <Button layoutX="125.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" text="Editar material">
                <HBox.margin>
-                  <Insets left="7.0" top="7.0" />
+                  <Insets left="370.0" top="7.0" />
                </HBox.margin>
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
@@ -133,7 +123,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="260.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" text="Borrar material">
+            <Button layoutX="260.0" layoutY="17.0" mnemonicParsing="false" onAction="#clickDelete" prefHeight="30.0" prefWidth="128.0" text="Borrar material">
                <HBox.margin>
                   <Insets left="7.0" top="7.0" />
                </HBox.margin>
@@ -147,5 +137,63 @@
             </Button>
          </children>
       </HBox>
+      <VBox layoutX="1016.0" layoutY="207.0" prefHeight="440.0" prefWidth="265.0">
+         <children>
+            <VBox prefHeight="457.0" prefWidth="265.0">
+               <children>
+                  <Label text="Nuevo material">
+                     <font>
+                        <Font name="Roboto" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="40.0" top="20.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icons/plus_math_120px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <TextField fx:id="materialNameTextField" prefHeight="44.0" prefWidth="239.0" promptText="Ingrese un nombre">
+                     <VBox.margin>
+                        <Insets top="50.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ComboBox fx:id="materialClassComboBox" onAction="#loadComboboxMaterial" prefHeight="35.0" prefWidth="239.0" promptText="Seleccione categoria">
+                     <VBox.margin>
+                        <Insets left="15.0" top="40.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <TextField fx:id="materialCostTextField" prefHeight="44.0" prefWidth="348.0" promptText="Ingrese el precio">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="buttonNewMaterial" mnemonicParsing="false" onAction="#clickAdd" prefHeight="32.0" prefWidth="100.0" text="Añadir">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" top="50.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#clickCancel" prefHeight="32.0" prefWidth="100.0" text="Cancelar">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" top="50.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

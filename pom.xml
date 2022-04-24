@@ -1,0 +1,6 @@
+<!-- https://mvnrepository.com/artifact/org.hildan.fxgson/fx-gson -->
+<dependency>
+    <groupId>org.hildan.fxgson</groupId>
+    <artifactId>fx-gson</artifactId>
+    <version>4.0.1</version>
+</dependency>
