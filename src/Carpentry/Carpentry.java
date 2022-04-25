@@ -13,26 +13,34 @@ public class Carpentry {
     private String address;
     private final ObservableList<Material> listMaterial;
     private final ObservableList<Article> listArticle;
+    private final ObservableList<Budget> listBudget;
 
     public Carpentry(String name,String address){
         this.name = name;
         this.address = address;
         this.listMaterial = FXCollections.observableArrayList();
         this.listArticle = FXCollections.observableArrayList();
+        this.listBudget = FXCollections.observableArrayList();
     }
 
     public ObservableList<Material> getListMaterials() {
         return listMaterial;
     }
 
-    public void delete(Material selected) {
+    public ObservableList<Budget> getListBudget() {
+        return listBudget;
+    }
+
+    public ObservableList<Article> getListArticle() {
+        return listArticle;
+    }
+
+    public void deleteMaterial(Material selected) {
         this.listMaterial.remove(selected);
-        // Code to update DB
     }
 
     public void newMaterial(Material newMat) {
         this.listMaterial.add(newMat);
-        // Code to update DB
     }
 
     public String getName() {

@@ -9,8 +9,10 @@ public class Material {
     private StringProperty name;
     private IntegerProperty costPrice;
     private MaterialClass materialClass;
+    private IntegerProperty id;
 
-    public Material(String name, Integer costPrice, MaterialClass materialClass) {
+    public Material(String name, Integer costPrice, Integer id, MaterialClass materialClass) {
+        this.id = new SimpleIntegerProperty(id);
         this.name =  new SimpleStringProperty(name);
         this.costPrice = new SimpleIntegerProperty(costPrice);
         this.materialClass = materialClass;
@@ -42,12 +44,17 @@ public class Material {
         return this.costPrice.get();
     }
 
-    public Material editMaterial(Material material){
-
-        return material;
+    public int getId() {
+        return id.get();
     }
 
+    public IntegerProperty idProperty() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id.set(id);
+    }
 
     @Override
     public String toString() {

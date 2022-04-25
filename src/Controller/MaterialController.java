@@ -4,16 +4,13 @@ import Alert.Alerts;
 import Carpentry.Carpentry;
 import Carpentry.Materials.Material;
 import Carpentry.Materials.MaterialClass;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,9 +23,9 @@ import json.CarpentryJson;
 public class MaterialController implements Initializable {
     //configure the table
     @FXML private TableView<Material> tableMaterialView;
-    @FXML private ListView<String> listViewOnlyMaderas;
     @FXML private TableColumn<Material, String> materialNameColumn;
     @FXML private TableColumn<Material, Integer> materialCostColumn;
+    @FXML private TableColumn<Material, Integer> materialIdColumn;
 
     //These instance variables are used to create new Person objects
     @FXML private TextField materialNameTextField;
@@ -74,7 +71,24 @@ public class MaterialController implements Initializable {
         materialNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         materialCostColumn.setCellValueFactory(new PropertyValueFactory<>("CostPrice"));
         materialCostColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        materialIdColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        materialIdColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         searchBarProduct(carp.getListMaterials());
+
+    }
+    public void onEditNameMaterialChanged(TableColumn.CellEditEvent<Material,String>materialStringCellEditEvent){
+        Material mat = tableMaterialView.getSelectionModel().getSelectedItem();
+        mat.setName(materialStringCellEditEvent.getNewValue());
+
+        json.saveCarpentryJson(carp);
+
+    }
+
+    public void onEditCostMaterialChanged(TableColumn.CellEditEvent<Material,Integer>materialIntegerCellEditEvent){
+        Material mat = tableMaterialView.getSelectionModel().getSelectedItem();
+        mat.setCostPrice(materialIntegerCellEditEvent.getNewValue());
+
+        json.saveCarpentryJson(carp);
 
     }
 
@@ -103,6 +117,9 @@ public class MaterialController implements Initializable {
 
     }
 
+    public void allList(){
+        tableMaterialView.setItems(carp.getListMaterials());
+    }
     public void maderaList (){
         FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass() == MaterialClass.Maderas);
         tableMaterialView.setItems(selectedClass);
@@ -139,7 +156,7 @@ public class MaterialController implements Initializable {
         boolean bool = alerts.showAlertDelete();
         if(bool){
             Material selected = tableMaterialView.getSelectionModel().getSelectedItem();
-            carp.delete(selected);
+            carp.deleteMaterial(selected);
             json.saveCarpentryJson(carp);
             System.out.print("borrado");
             UpdateTable();
@@ -150,7 +167,7 @@ public class MaterialController implements Initializable {
     @FXML
     private void clickAdd() {
         try {
-            Material newMat = new Material(materialNameTextField.getText(), (Integer.parseInt(materialCostTextField.getText())),materialClassComboBox.getValue());
+            Material newMat = new Material(materialNameTextField.getText(), (Integer.parseInt(materialCostTextField.getText())),idMaterial(),materialClassComboBox.getValue());
 
             carp.newMaterial(newMat);
             tableMaterialView.setItems(carp.getListMaterials());
@@ -166,6 +183,17 @@ public class MaterialController implements Initializable {
         }
     }
 
+    public Integer idMaterial(){
+        int newId = 0;
+        if(carp != null){
+            for (Material mat : carp.getListMaterials()){
+                newId = mat.getId()+1;
+            }
+        }
+        else
+            return 0;
+        return newId;
+    }
 
     @FXML
     private void clickCancel(){

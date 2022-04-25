@@ -48,6 +48,7 @@
       <HBox layoutY="646.0" prefHeight="74.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" />
       <VBox layoutY="163.0" prefHeight="483.0" prefWidth="247.0" style="-fx-background-color: #6396E7;">
          <children>
+            <Button id="button2" mnemonicParsing="false" onAction="#allList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Todos" />
             <Button id="button2" fx:id="maderasButton" mnemonicParsing="false" onAction="#maderaList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Maderas">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -93,8 +94,9 @@
       </VBox>
       <TableView fx:id="tableMaterialView" layoutX="247.0" layoutY="206.0" prefHeight="440.0" prefWidth="769.0">
          <columns>
-            <TableColumn fx:id="materialNameColumn" prefWidth="587.0" text="Nombre" />
-            <TableColumn fx:id="materialCostColumn" minWidth="0.0" prefWidth="181.0" text="Precio Costo" />
+            <TableColumn fx:id="materialIdColumn" prefWidth="44.0" text="ID" />
+            <TableColumn fx:id="materialNameColumn" onEditCommit="#onEditNameMaterialChanged" prefWidth="563.0" text="Nombre" />
+            <TableColumn fx:id="materialCostColumn" minWidth="0.0" onEditCommit="#onEditCostMaterialChanged" prefWidth="171.0" text="Precio Costo" />
          </columns>
       </TableView>
       <HBox layoutX="247.0" layoutY="163.0" prefHeight="44.0" prefWidth="1033.0">
