@@ -49,31 +49,23 @@
       <VBox layoutY="163.0" prefHeight="483.0" prefWidth="247.0" style="-fx-background-color: #6396E7;">
          <children>
             <Button id="button2" mnemonicParsing="false" onAction="#allList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Todos" />
-            <Button id="button2" fx:id="maderasButton" mnemonicParsing="false" onAction="#maderaList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Maderas">
+            <Button id="button2" mnemonicParsing="false" onAction="#melaminasList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Melaminas">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Icons/wooden_floor_120px.png" />
+                        <Image url="@../Icons/white_large_square_120px.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" onAction="#herrajelist" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Herrajes">
+            <Button id="button2" mnemonicParsing="false" onAction="#fibrosList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Fibros         ">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Icons/pulley_120px.png" />
+                        <Image url="@../Icons/brown_square_120px.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" onAction="#tornilloList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Tornillos/Clavos">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Icons/screw_120px.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" onAction="#tapacantoList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Tapacantos">
+            <Button id="button2" mnemonicParsing="false" onAction="#tapacantoList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Tapacantos  ">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -81,7 +73,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button id="button2" mnemonicParsing="false" onAction="#otrosList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Varios">
+            <Button id="button2" mnemonicParsing="false" onAction="#otrosList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Otros           ">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -94,14 +86,14 @@
       </VBox>
       <TableView fx:id="tableMaterialView" layoutX="247.0" layoutY="206.0" prefHeight="440.0" prefWidth="769.0">
          <columns>
-            <TableColumn fx:id="materialIdColumn" prefWidth="44.0" text="ID" />
+            <TableColumn fx:id="materialIdColumn" editable="false" prefWidth="44.0" text="ID" />
             <TableColumn fx:id="materialNameColumn" onEditCommit="#onEditNameMaterialChanged" prefWidth="563.0" text="Nombre" />
             <TableColumn fx:id="materialCostColumn" minWidth="0.0" onEditCommit="#onEditCostMaterialChanged" prefWidth="171.0" text="Precio Costo" />
          </columns>
       </TableView>
       <HBox layoutX="247.0" layoutY="163.0" prefHeight="44.0" prefWidth="1033.0">
          <children>
-            <Button fx:id="goBack" mnemonicParsing="false" onAction="#ClickBack" prefHeight="30.0" prefWidth="128.0" text="Volver">
+            <Button mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="128.0" text="Volver">
                <HBox.margin>
                   <Insets left="7.0" top="7.0" />
                </HBox.margin>

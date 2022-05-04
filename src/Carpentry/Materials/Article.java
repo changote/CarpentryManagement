@@ -1,42 +1,61 @@
 package Carpentry.Materials;
 
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
 public class Article {
-    private String name;
-    private float costPrice;
-    private float finalPrice;
-    private ObservableList<Material> listMaterial;
+    private StringProperty name;
+    private IntegerProperty costPrice;
+    private IntegerProperty id;
+    private double finalPrice;
+    private StringProperty materialClass;
 
-    public Article(String name, float costprice, float finalprice, ArrayList<Material> materialslist) {
-        this.name = name;
-        this.costPrice = costprice;
-        this.finalPrice = finalprice;
-        this.listMaterial = FXCollections.observableArrayList();
+    public Article(String name, Integer costPrice, Integer id, String materialClass) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name =  new SimpleStringProperty(name);
+        this.costPrice = new SimpleIntegerProperty(costPrice);
+        this.materialClass = new SimpleStringProperty(materialClass);
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
-    public ObservableList<Material> getListMaterials() {
-        return listMaterial;
+    public String getName() {
+        return this.name.get();
     }
 
-    public void setCostPrice(float costPrice) {
-        this.costPrice = costPrice;
+//
+//    public void setPercentageWorkForce(double percentageWorkForce) {
+//        this.percentageWorkForce = percentageWorkForce/10;
+//    }
+
+    public Integer getCostPrice() {
+        return this.costPrice.get();
     }
 
-    public void setFinalPrice(float finalPrice) {
-        this.finalPrice = finalPrice;
+    public Double getFinalPrice() {
+        return this.finalPrice;
     }
 
-    public Article editArticle(Article article){
+    public void setFinalPrice(Double finalPrice) {
+        this.finalPrice=finalPrice;
+    }
 
-        return article;
+
+    public void setCostPrice(Integer costPrice) {
+        this.costPrice.set(costPrice);
+    }
+
+
+    public Integer getId() {
+        return this.id.get();
+    }
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     @Override
@@ -44,8 +63,7 @@ public class Article {
         return "Article:" +
                 "/nname='" + name + '\'' +
                 ", /ncostprice=" + costPrice +
-                ", /nfinalprice=" + finalPrice +
-                ", /nmaterialslist=" + listMaterial +
+                 ", /nfinalprice=" + finalPrice +
                 '}';
     }
 }

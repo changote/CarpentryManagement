@@ -1,11 +1,9 @@
 package Carpentry.Materials;
 
 public enum MaterialClass {
-    Maderas,
-    Herrajes,
-    Tornillos,
+    Melaminas,
+    Fibros,
     Tapacantos,
     Otros;
-
 
 }

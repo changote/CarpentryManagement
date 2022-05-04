@@ -8,28 +8,26 @@ import javafx.beans.property.StringProperty;
 public class Material {
     private StringProperty name;
     private IntegerProperty costPrice;
-    private MaterialClass materialClass;
+    private StringProperty materialClass;
     private IntegerProperty id;
 
-    public Material(String name, Integer costPrice, Integer id, MaterialClass materialClass) {
+    public Material(String name, Integer costPrice, Integer id, String materialClass) {
         this.id = new SimpleIntegerProperty(id);
         this.name =  new SimpleStringProperty(name);
         this.costPrice = new SimpleIntegerProperty(costPrice);
-        this.materialClass = materialClass;
+        this.materialClass = new SimpleStringProperty(materialClass);
     }
-
-
 
     public void setName(String name) {
         this.name.set(name);
     }
 
-    public MaterialClass getMaterialClass() {
-        return materialClass;
+    public String getMaterialClass() {
+        return this.materialClass.get();
     }
 
-    public void setMaterialClass(MaterialClass materialClass) {
-        this.materialClass = materialClass;
+    public void setMaterialClass(String materialClass) {
+        this.materialClass.set(materialClass);
     }
 
     public void setCostPrice(Integer costPrice) {
@@ -40,11 +38,11 @@ public class Material {
         return this.name.get();
     }
 
-    public int getCostPrice() {
+    public Integer getCostPrice() {
         return this.costPrice.get();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id.get();
     }
 
@@ -63,4 +61,5 @@ public class Material {
                 ", costPrice=" + costPrice +
                 '}';
     }
+
 }

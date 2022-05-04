@@ -8,7 +8,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -17,6 +20,7 @@ import java.util.ResourceBundle;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import json.CarpentryJson;
 
@@ -33,6 +37,11 @@ public class MaterialController implements Initializable {
     @FXML private TextField materialCostTextField;
 
     @FXML private TextField keywordTextField;
+
+    private Stage stg;
+    public void setStage(Stage stg) {
+        this.stg=stg;
+    }
 
     CarpentryJson json = new CarpentryJson();
     /**
@@ -51,8 +60,9 @@ public class MaterialController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //carp.mostrarMaterial();
-        //getCarp();
-
+        //
+        if(carp == null)
+            getCarp();
         tableMaterialView.setItems(carp.getListMaterials());
         //Update the table to allow for the name and cost fields
         UpdateTable();
@@ -95,14 +105,16 @@ public class MaterialController implements Initializable {
     public void searchBarProduct(ObservableList<Material> dataMaterial ){
         FilteredList<Material> filteredData = new FilteredList<>(dataMaterial, b -> true);
         keywordTextField.textProperty().addListener((observable,oldValue,newValue) -> {
-            filteredData.setPredicate(tableMaterialName -> {
+            filteredData.setPredicate(materialSearch -> {
 
                 if(newValue.isEmpty() || newValue.isBlank()){
                     return true;
                 }
                 String searchKeyword = newValue.toLowerCase();
 
-                if(tableMaterialName.getName().toLowerCase().indexOf(searchKeyword) > -1){
+                if(materialSearch.getName().toLowerCase().indexOf(searchKeyword) > -1){
+                    return true;
+                } else if(materialSearch.getId().toString().indexOf(searchKeyword) > -1){
                     return true;
                 }
                 else
@@ -120,24 +132,20 @@ public class MaterialController implements Initializable {
     public void allList(){
         tableMaterialView.setItems(carp.getListMaterials());
     }
-    public void maderaList (){
-        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass() == MaterialClass.Maderas);
+    public void melaminasList (){
+        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass().equals(MaterialClass.Melaminas.toString()));
         tableMaterialView.setItems(selectedClass);
     }
-    public void herrajelist (){
-        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass() == MaterialClass.Herrajes);
-        tableMaterialView.setItems(selectedClass);
-    }
-    public void tornilloList (){
-        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass() == MaterialClass.Tornillos);
+    public void fibrosList (){
+        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass().equals(MaterialClass.Fibros.toString()));
         tableMaterialView.setItems(selectedClass);
     }
     public void tapacantoList (){
-        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass() == MaterialClass.Tapacantos);
+        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass().equals(MaterialClass.Tapacantos.toString()));
         tableMaterialView.setItems(selectedClass);
     }
     public void otrosList (){
-        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass() == MaterialClass.Otros);
+        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass().equals(MaterialClass.Otros.toString()));
         tableMaterialView.setItems(selectedClass);
     }
 
@@ -147,8 +155,14 @@ public class MaterialController implements Initializable {
     }
 
 
-    public void ClickBack() throws IOException {
-        scene.ClickBack();
+    public void goBack() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
+        Parent root = loader.load();
+        SceneController sceneController = loader.getController();
+        sceneController.setStage(stg);
+
+        stg.setScene(new Scene(root));
+        stg.show();
     }
 
     @FXML
@@ -167,7 +181,7 @@ public class MaterialController implements Initializable {
     @FXML
     private void clickAdd() {
         try {
-            Material newMat = new Material(materialNameTextField.getText(), (Integer.parseInt(materialCostTextField.getText())),idMaterial(),materialClassComboBox.getValue());
+            Material newMat = new Material(materialNameTextField.getText(), (Integer.parseInt(materialCostTextField.getText())),idMaterial(),materialClassComboBox.getValue().toString());
 
             carp.newMaterial(newMat);
             tableMaterialView.setItems(carp.getListMaterials());
@@ -202,13 +216,13 @@ public class MaterialController implements Initializable {
     }
 
 
-    /*public void getCarp(Carpentry carp)
+    public void getCarp()
     {
-        Carpentry people = carp;
-        people.newMaterial(new Material("Frank",200));
-        people.newMaterial(new Material("Rebecca",300));
-        people.newMaterial(new Material("Mr.",400));
-        //json.saveCarpentryJson(people);
+        Carpentry people = new Carpentry("sadasd","asdasd");
+        people.newMaterial(new Material("Frank",200,0,"Melaminas"));
+        people.newMaterial(new Material("Rebecca",300,1,"Melaminas"));
+        people.newMaterial(new Material("Mr.",400,2,"Melaminas"));
+        json.saveCarpentryJson(people);
 
-    }*/
+    }
 }

@@ -14,6 +14,7 @@ public class Carpentry {
     private final ObservableList<Material> listMaterial;
     private final ObservableList<Article> listArticle;
     private final ObservableList<Budget> listBudget;
+    private double percentageWorkForce;
 
     public Carpentry(String name,String address){
         this.name = name;
@@ -43,12 +44,39 @@ public class Carpentry {
         this.listMaterial.add(newMat);
     }
 
+    public double getPercentageWorkForce() {
+        return percentageWorkForce;
+    }
+
+    public void refreshFinalPrice(){
+        for(Article art : getListArticle()){
+            art.setFinalPrice(art.getCostPrice()*(getPercentageWorkForce()+1));
+        }
+    }
+
+    public void mostrarFinal(){
+        for(Article art : getListArticle()){
+            System.out.print(" / "+art.getFinalPrice());
+        }
+    }
+    public void setPercentageWorkForce(double percentageWorkForce) {
+        this.percentageWorkForce = percentageWorkForce;
+    }
+
     public String getName() {
         return name;
     }
 
     public String getAddress() {
         return address;
+    }
+
+    public void deleteArticle(Article selected) {
+        this.listArticle.remove(selected);
+    }
+
+    public void newArticle(Article newArt) {
+        this.listArticle.add(newArt);
     }
 
     public void setName(String name) {

@@ -35,4 +35,11 @@ public class Alerts {
         alert.setContentText("Error al ingresar el costo");
         alert.showAndWait();
     }
+    public void showAlertCategoryError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText("Error al ingresar la categoria");
+        alert.showAndWait();
+    }
 }

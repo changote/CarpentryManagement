@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NewArticleController">
+   <children>
+      <HBox prefHeight="91.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" />
+      <TextField fx:id="nameTextField" layoutX="418.0" layoutY="220.0" prefHeight="38.0" prefWidth="404.0" promptText="Nombre del articulo" />
+      <TextField fx:id="costTextField" layoutX="418.0" layoutY="322.0" prefHeight="38.0" prefWidth="404.0" promptText="Ingrese el costo" />
+      <Button layoutX="1082.0" layoutY="662.0" mnemonicParsing="false" onAction="#clickAddMaterialToArticleList" prefHeight="38.0" prefWidth="166.0" text="Crear articulo">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icons/arrow_110px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="32.0" layoutY="662.0" mnemonicParsing="false" onAction="#ClickCancelNA" prefHeight="38.0" prefWidth="166.0" text="Cancelar" />
+      <Label layoutX="570.0" layoutY="124.0" text="Datos articulo">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboboxMaterialClass" layoutX="482.0" layoutY="437.0" onAction="#loadComboboxMaterial" prefHeight="38.0" prefWidth="276.0" />
+   </children>
+</AnchorPane>

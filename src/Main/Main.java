@@ -1,6 +1,7 @@
 package Main;
 
 import Carpentry.Materials.Material;
+import Controller.SceneController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,10 @@ public class Main extends Application {
 
         stg = primaryStage;
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
+        Parent root = loader.load();
+        SceneController sceneController = loader.getController();
+        sceneController.setStage(stg);
         primaryStage.setTitle("Carpentry Management");
         Image icon = new Image("/icons/jticon.png");
         primaryStage.getIcons().add(icon);
