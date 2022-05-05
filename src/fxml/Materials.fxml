@@ -48,7 +48,14 @@
       <HBox layoutY="646.0" prefHeight="74.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;" />
       <VBox layoutY="163.0" prefHeight="483.0" prefWidth="247.0" style="-fx-background-color: #6396E7;">
          <children>
-            <Button id="button2" mnemonicParsing="false" onAction="#allList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Todos" />
+            <Button id="button2" mnemonicParsing="false" onAction="#allList" prefHeight="54.0" prefWidth="256.0" styleClass="button2" stylesheets="@../css/styling.css" text="Todos      ">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icons/mate_120px.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button id="button2" mnemonicParsing="false" onAction="#melaminasList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Melaminas">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -73,6 +80,15 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <Button id="button2" mnemonicParsing="false" onAction="#varillasList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Varillas        ">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icons/cinnamon_sticks_120px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Button id="button2" mnemonicParsing="false" onAction="#otrosList" prefHeight="54.0" prefWidth="255.0" styleClass="button2" stylesheets="@../css/styling.css" text="Otros           ">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -105,9 +121,21 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button mnemonicParsing="false" onAction="#clickEditGroup" prefHeight="30.0" prefWidth="175.0" text="Editar precio categoria">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icons/edit_120px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="320.0" top="7.0" />
+               </HBox.margin>
+            </Button>
             <Button layoutX="260.0" layoutY="17.0" mnemonicParsing="false" onAction="#clickDelete" prefHeight="30.0" prefWidth="128.0" text="Borrar material">
                <HBox.margin>
-                  <Insets left="505.0" top="7.0" />
+                  <Insets left="10.0" top="7.0" />
                </HBox.margin>
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
@@ -140,7 +168,7 @@
                   </Label>
                   <TextField fx:id="materialNameTextField" prefHeight="44.0" prefWidth="239.0" promptText="Ingrese un nombre">
                      <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets left="20.0" right="20.0" top="50.0" />
                      </VBox.margin>
                   </TextField>
                   <ComboBox fx:id="materialClassComboBox" onAction="#loadComboboxMaterial" prefHeight="35.0" prefWidth="239.0" promptText="Seleccione categoria">
@@ -148,10 +176,13 @@
                         <Insets left="15.0" top="40.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <TextField fx:id="materialCostTextField" prefHeight="44.0" prefWidth="348.0" promptText="Ingrese el precio">
+                  <TextField fx:id="materialCostTextField" prefHeight="44.0" prefWidth="233.0" promptText="Ingrese el precio">
                      <VBox.margin>
-                        <Insets top="40.0" />
+                        <Insets left="20.0" right="20.0" top="40.0" />
                      </VBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>

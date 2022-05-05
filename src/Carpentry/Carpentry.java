@@ -4,9 +4,6 @@ package Carpentry;
 import Carpentry.Materials.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-
-import java.util.ArrayList;
 
 public class Carpentry {
     private String name;
@@ -78,6 +75,23 @@ public class Carpentry {
     public void newArticle(Article newArt) {
         this.listArticle.add(newArt);
     }
+
+    public void editPercentageMaterialClass(String material,double percentage){
+        percentage = percentage / 100;
+        for(Material mat:getListMaterials()){
+            if(mat.getMaterialClass().equals(material)){
+                mat.setCostPrice(mat.getCostPrice()*(percentage+1));
+            }
+
+        }
+        for(Article art:getListArticle()){
+            if(art.getMaterialClass().equals(material)){
+                art.setCostPrice(art.getCostPrice()*(percentage+1));
+                refreshFinalPrice();
+            }
+        }
+    }
+
 
     public void setName(String name) {
         this.name = name;

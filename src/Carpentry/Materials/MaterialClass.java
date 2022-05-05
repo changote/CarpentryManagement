@@ -4,6 +4,7 @@ public enum MaterialClass {
     Melaminas,
     Fibros,
     Tapacantos,
+    Varillas,
     Otros;
 
 }

@@ -2,25 +2,16 @@ package Controller;
 
 import Alert.Alerts;
 import Carpentry.Carpentry;
-import Carpentry.Materials.Article;
-import Carpentry.Materials.Material;
+import Carpentry.Materials.*;
 import Carpentry.Materials.MaterialClass;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
 import json.CarpentryJson;
-import org.controlsfx.control.textfield.TextFields;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,7 +39,13 @@ public class NewArticleController implements Initializable {
     }
 
     public void loadComboboxMaterial(){
-        comboboxMaterialClass.getItems().addAll(MaterialClass.values());
+         if(!comboboxMaterialClass.getItems().contains(MaterialClass.Fibros)
+                 || !comboboxMaterialClass.getItems().contains(MaterialClass.Melaminas)
+                 || !comboboxMaterialClass.getItems().contains(MaterialClass.Tapacantos)
+                 || !comboboxMaterialClass.getItems().contains(MaterialClass.Varillas)
+                 || !comboboxMaterialClass.getItems().contains(MaterialClass.Otros)) {
+             comboboxMaterialClass.getItems().addAll(MaterialClass.values());
+         }
     }
 
     @FXML private void clickAddMaterialToArticleList() {
@@ -60,11 +57,12 @@ public class NewArticleController implements Initializable {
             ClickAddAux();
 
         } catch (Exception e) {
-            if (nameTextField.getText().equals("") || nameTextField.getText().isBlank()) { ////////OBTIENE UN NOMBRE
+            if (nameTextField.getText().equals("") || nameTextField.getText().isBlank()) {
                 alerts.showAlertNameError();
-            }else if (costTextField.getText().equals("") || costTextField.getText().chars().allMatch(Character::isWhitespace) || !costTextField.getText().contains("[a-zA-Z]+")) {
-                alerts.showAlertCostError(); ///////////OBTIENE UN NUMERO
-            }
+            }else if (costTextField.getText().isBlank() || costTextField.getText().contains("[a-zA-Z]+")) {
+                alerts.showAlertCostError();
+            }else if (comboboxMaterialClass.getValue() == null)
+                alerts.showAlertCategoryError();
 
         }
     }

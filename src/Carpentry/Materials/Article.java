@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class Article {
     private StringProperty name;
-    private IntegerProperty costPrice;
+    private double costPrice;
     private IntegerProperty id;
     private double finalPrice;
     private StringProperty materialClass;
 
-    public Article(String name, Integer costPrice, Integer id, String materialClass) {
+    public Article(String name, double costPrice, Integer id, String materialClass) {
         this.id = new SimpleIntegerProperty(id);
         this.name =  new SimpleStringProperty(name);
-        this.costPrice = new SimpleIntegerProperty(costPrice);
+        this.costPrice = costPrice;
         this.materialClass = new SimpleStringProperty(materialClass);
     }
 
@@ -33,8 +33,8 @@ public class Article {
 //        this.percentageWorkForce = percentageWorkForce/10;
 //    }
 
-    public Integer getCostPrice() {
-        return this.costPrice.get();
+    public double getCostPrice() {
+        return this.costPrice;
     }
 
     public Double getFinalPrice() {
@@ -46,8 +46,12 @@ public class Article {
     }
 
 
-    public void setCostPrice(Integer costPrice) {
-        this.costPrice.set(costPrice);
+    public String getMaterialClass() {
+        return this.materialClass.get();
+    }
+
+    public void setCostPrice(double costPrice) {
+        this.costPrice = costPrice;
     }
 
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditMaterialClassController">
+   <children>
+      <HBox prefHeight="136.0" prefWidth="1280.0" style="-fx-background-color: #2D75E8;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="JT            Materiales" wrappingWidth="973.13671875">
+               <font>
+                  <Font name="Roboto Slab Light" size="96.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Text>
+         </children></HBox>
+      <TextField fx:id="percentageTextField" layoutX="578.0" layoutY="483.0" prefHeight="38.0" prefWidth="88.0" promptText="Ej: 20, -5" />
+      <Button layoutX="1082.0" layoutY="662.0" mnemonicParsing="false" onAction="#clickReady" prefHeight="38.0" prefWidth="166.0" text="Listo">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icons/arrow_110px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="32.0" layoutY="662.0" mnemonicParsing="false" onAction="#ClickCancel" prefHeight="38.0" prefWidth="166.0" text="Cancelar" />
+      <Label layoutX="477.0" layoutY="195.0" text="Cambiar precio por grupo">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboboxMaterialClass" layoutX="536.0" layoutY="336.0" onAction="#loadComboboxMaterial" prefHeight="38.0" prefWidth="276.0" promptText="Categoria">
+         <padding>
+            <Insets left="100.0" />
+         </padding></ComboBox>
+      <Text layoutX="143.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione el grupo a cambiar:">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
+      <Text layoutX="131.0" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese el porcentaje a cambiar:">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
+      <Text layoutX="550.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

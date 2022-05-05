@@ -2,19 +2,13 @@ package Controller;
 
 import Alert.Alerts;
 import Carpentry.Carpentry;
-import Carpentry.Materials.Article;
-import Carpentry.Materials.Material;
-import Main.Main;
-import com.sun.javafx.logging.Logger;
-import com.sun.javafx.logging.PlatformLogger;
+import Carpentry.Materials.*;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -23,18 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import json.CarpentryJson;
-import org.controlsfx.control.textfield.TextFields;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,7 +30,7 @@ import java.util.ResourceBundle;
 public class ArticleController implements Initializable {
     @FXML private TableView<Article> tableArticleView;
     @FXML private TableColumn<Article, String> articleNameColumn;
-    @FXML private TableColumn<Article, Integer> articleCostColumn;
+    @FXML private TableColumn<Article, Double> articleCostColumn;
     @FXML private TableColumn<Article, Integer> articleIdColumn;
     @FXML private TableColumn<Article, Double> articleFinalPriceColumn;
 
@@ -87,7 +74,7 @@ public class ArticleController implements Initializable {
         articleNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         articleNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         articleCostColumn.setCellValueFactory(new PropertyValueFactory<>("costPrice"));
-        articleCostColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        articleCostColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         articleIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         articleIdColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         articleFinalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("finalPrice"));

@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import json.CarpentryJson;
 
@@ -28,7 +29,7 @@ public class MaterialController implements Initializable {
     //configure the table
     @FXML private TableView<Material> tableMaterialView;
     @FXML private TableColumn<Material, String> materialNameColumn;
-    @FXML private TableColumn<Material, Integer> materialCostColumn;
+    @FXML private TableColumn<Material, Double> materialCostColumn;
     @FXML private TableColumn<Material, Integer> materialIdColumn;
 
     //These instance variables are used to create new Person objects
@@ -80,7 +81,7 @@ public class MaterialController implements Initializable {
         materialNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         materialNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         materialCostColumn.setCellValueFactory(new PropertyValueFactory<>("CostPrice"));
-        materialCostColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        materialCostColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         materialIdColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
         materialIdColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         searchBarProduct(carp.getListMaterials());
@@ -94,7 +95,7 @@ public class MaterialController implements Initializable {
 
     }
 
-    public void onEditCostMaterialChanged(TableColumn.CellEditEvent<Material,Integer>materialIntegerCellEditEvent){
+    public void onEditCostMaterialChanged(TableColumn.CellEditEvent<Material,Double>materialIntegerCellEditEvent){
         Material mat = tableMaterialView.getSelectionModel().getSelectedItem();
         mat.setCostPrice(materialIntegerCellEditEvent.getNewValue());
 
@@ -144,6 +145,10 @@ public class MaterialController implements Initializable {
         FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass().equals(MaterialClass.Tapacantos.toString()));
         tableMaterialView.setItems(selectedClass);
     }
+    public void varillasList (){
+        FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass().equals(MaterialClass.Varillas.toString()));
+        tableMaterialView.setItems(selectedClass);
+    }
     public void otrosList (){
         FilteredList<Material> selectedClass = new FilteredList<>(carp.getListMaterials(), i-> i.getMaterialClass().equals(MaterialClass.Otros.toString()));
         tableMaterialView.setItems(selectedClass);
@@ -151,7 +156,13 @@ public class MaterialController implements Initializable {
 
 
     public void loadComboboxMaterial(){
-        materialClassComboBox.getItems().addAll(MaterialClass.values());
+        if(!materialClassComboBox.getItems().contains(MaterialClass.Fibros)
+                || !materialClassComboBox.getItems().contains(MaterialClass.Melaminas)
+                || !materialClassComboBox.getItems().contains(MaterialClass.Tapacantos)
+                || !materialClassComboBox.getItems().contains(MaterialClass.Varillas)
+                || !materialClassComboBox.getItems().contains(MaterialClass.Otros)) {
+            materialClassComboBox.getItems().addAll(MaterialClass.values());
+        }
     }
 
 
@@ -160,6 +171,16 @@ public class MaterialController implements Initializable {
         Parent root = loader.load();
         SceneController sceneController = loader.getController();
         sceneController.setStage(stg);
+
+        stg.setScene(new Scene(root));
+        stg.show();
+    }
+
+    public void clickEditGroup() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EditMaterialClass.fxml"));
+        Parent root = loader.load();
+        EditMaterialClassController editMaterialClassController = loader.getController();
+        editMaterialClassController.setStage(stg);
 
         stg.setScene(new Scene(root));
         stg.show();
@@ -186,14 +207,16 @@ public class MaterialController implements Initializable {
             carp.newMaterial(newMat);
             tableMaterialView.setItems(carp.getListMaterials());
             json.saveCarpentryJson(carp);
+            materialNameTextField.clear();
+            materialCostTextField.clear();
             UpdateTable();
         } catch (Exception e) {
-            if (materialNameTextField.getText().equals("") || materialNameTextField.getText().isBlank()) { ////////OBTIENE UN NOMBRE
+            if (materialNameTextField.getText().equals("") || materialNameTextField.getText().isBlank()) {
                 alerts.showAlertNameError();
-            }else if (materialCostTextField.getText().equals("") || materialCostTextField.getText().chars().allMatch(Character::isWhitespace) || !materialCostTextField.getText().contains("[a-zA-Z]+")) {
-                alerts.showAlertCostError(); ///////////OBTIENE UN NUMERO
-            }
-
+            }else if (materialCostTextField.getText().isBlank() || materialCostTextField.getText().contains("[a-zA-Z]+")) {
+                alerts.showAlertCostError();
+            }else if (materialClassComboBox.getValue() == null)
+                alerts.showAlertCategoryError();
         }
     }
 
@@ -219,9 +242,9 @@ public class MaterialController implements Initializable {
     public void getCarp()
     {
         Carpentry people = new Carpentry("sadasd","asdasd");
-        people.newMaterial(new Material("Frank",200,0,"Melaminas"));
-        people.newMaterial(new Material("Rebecca",300,1,"Melaminas"));
-        people.newMaterial(new Material("Mr.",400,2,"Melaminas"));
+        //people.newMaterial(new Material("Frank",200,0,"Melaminas"));
+       // people.newMaterial(new Material("Rebecca",300,1,"Melaminas"));
+        //people.newMaterial(new Material("Mr.",400,2,"Melaminas"));
         json.saveCarpentryJson(people);
 
     }

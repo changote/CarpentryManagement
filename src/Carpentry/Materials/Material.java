@@ -7,14 +7,14 @@ import javafx.beans.property.StringProperty;
 
 public class Material {
     private StringProperty name;
-    private IntegerProperty costPrice;
+    private double costPrice;
     private StringProperty materialClass;
     private IntegerProperty id;
 
-    public Material(String name, Integer costPrice, Integer id, String materialClass) {
+    public Material(String name, double costPrice, Integer id, String materialClass) {
         this.id = new SimpleIntegerProperty(id);
         this.name =  new SimpleStringProperty(name);
-        this.costPrice = new SimpleIntegerProperty(costPrice);
+        this.costPrice = costPrice;
         this.materialClass = new SimpleStringProperty(materialClass);
     }
 
@@ -30,16 +30,16 @@ public class Material {
         this.materialClass.set(materialClass);
     }
 
-    public void setCostPrice(Integer costPrice) {
-        this.costPrice.set(costPrice);
+    public void setCostPrice(double costPrice) {
+        this.costPrice=costPrice;
     }
 
     public String getName() {
         return this.name.get();
     }
 
-    public Integer getCostPrice() {
-        return this.costPrice.get();
+    public double getCostPrice() {
+        return this.costPrice;
     }
 
     public Integer getId() {
